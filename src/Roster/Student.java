@@ -9,6 +9,10 @@ public class Student {
                 this.major = major;
                 this.credit = credit;
         }
+        public Student(String name, Major major){
+                this.name = name;
+                this.major = major;
+        }
         public void tuitionDue() {
         }
 
