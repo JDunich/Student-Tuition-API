@@ -29,7 +29,7 @@ public class TuitionManager {
     }
     private Student task(String command, StringTokenizer input){
         String name = input.nextToken();
-        Major major = Major.valueOf(input.nextToken());
+        Major major = Major.valueOf((input.nextToken()).toUpperCase());
         Student student = null;
         if(command.matches("AR|AN|AT|AI")) {
             int credit = Integer.parseInt(input.nextToken());
