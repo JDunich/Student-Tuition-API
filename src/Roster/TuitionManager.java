@@ -27,6 +27,7 @@ public class TuitionManager {
 
         }
     }
+    
     private Student task(String command, StringTokenizer input){
         String name = input.nextToken();
         Major major = Major.valueOf((input.nextToken()).toUpperCase());
@@ -35,6 +36,12 @@ public class TuitionManager {
             int credit = Integer.parseInt(input.nextToken());
             if(command.matches("AR")){
                 student = new Resident(name, major, credit);
+                if(student.validCredit()) { //add this method
+                    arr.add(student);
+                }
+                else {
+                    
+                }
             }
             if(command.matches("AN")){
                 student = new NonResident(name, major, credit);

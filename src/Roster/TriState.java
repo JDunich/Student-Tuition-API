@@ -2,8 +2,9 @@ package Roster;
 
 public class TriState extends NonResident{
     private String state;
-    public TriState(String name, Major major, int credit, String state) {
-        super(name, major, credit);
+    
+    public TriState(Profile profile, int credit, String state) {
+        super(profile, credit);
         this.state = state;
     }
 
