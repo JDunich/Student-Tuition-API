@@ -30,7 +30,9 @@ public class Profile {
      */
     @Override
     public String toString() {
-
+        String separator = ":";
+        String result = name + separator + major + separator;
+        return result;
     }
 
     /**

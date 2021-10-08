@@ -8,9 +8,12 @@ public class Resident extends Student {
     
     @Override
     public void tuitionDue() {
+        super.tuitionDue();
     }
     
     @Override
     public String toString(){
+        String result = super.toString();
+        return result + "resident";
     }
 }

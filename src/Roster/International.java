@@ -14,6 +14,9 @@ public class International extends NonResident {
     
     @Override
     public String toString(){
+        String separator = ":";
+        String result = super.toString();
+        return result + separator + "international";
     }
     
     public void setStatus() {
