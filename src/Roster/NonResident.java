@@ -7,6 +7,10 @@ public class NonResident extends Student {
     }
 
     @Override
+    public void tuitionDue() {
+    }
+    
+    @Override
     public String toString(){
     }
 }

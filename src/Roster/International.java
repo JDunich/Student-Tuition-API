@@ -7,8 +7,17 @@ public class International extends NonResident {
         super(profile, credit);
         this.abroad = abroad;
     }
-
+    
+    @Override
+    public void tuitionDue() {
+    }
+    
     @Override
     public String toString(){
+    }
+    
+    public void setStatus() {
+        this.abroad = true;
+        super.setCredits(12);
     }
 }
