@@ -13,33 +13,40 @@ public class TuitionManager {
         while(true){
             String s = sc.nextLine();
             StringTokenizer input = new StringTokenizer(s, ",");
-            if(notValid(s)){
+            String command = input.nextToken();
+            if(notValid(command)){
                 System.out.println("Command '" + s + "' not supported!");
                 continue;
             }
 
-            String command = input.nextToken();
             if(isPrint(command)) continue;
-            else{
-                if(badInfo) continue;
-                else task(command, input);
-            }
+            if(missingNameMajor(s)) continue;
+            task(command, input);
+
 
         }
     }
     
-    private Student task(String command, StringTokenizer input){
+    private void task(String command, StringTokenizer input){
+        if(!input.hasMoreTokens()){
+            System.out.println("Missing data in command line.");
+            return;
+        }
         String name = input.nextToken();
+        if(!input.hasMoreTokens()){
+            System.out.println("Missing data in command line.");
+            return;
+        }
         Major major = Major.valueOf((input.nextToken()).toUpperCase());
+        if(!validMajor(major)){
+            System.out.println("'" + major + "'" + " is not a valid major.");
+            return;
+        }
         Profile profile = null;
         Student student = null;
         if(command.matches("AR|AN|AT|AI")) {
             int credit = Integer.parseInt(input.nextToken());
-            if(command.matches("AR")){
-                profile = new Profile(name, major);
-                student = new Resident(profile, credit);
-            }
-            if(command.matches("AN")){
+            if(command.matches("AR|AN")){
                 profile = new Profile(name, major);
                 student = new NonResident(profile, credit);
             }
@@ -92,5 +99,41 @@ public class TuitionManager {
 
 
 
+    }
+
+    private boolean notValid(String command){
+        if(command.matches("AR|AN|AT|AI|R|T|S|F|P|PN|PT|C|Q")) return true;
+        else return false;
+    }
+
+    private boolean isPrint(String command){
+        switch(command) {
+            case "P":
+                arr.print();
+                return true;
+            case "PN":
+                arr.printName();
+                return true;
+            case "PT":
+                arr.printPaymentDate();
+                return true;
+            case "C":
+                return true;
+            case "Q":
+                return true;
+        }
+        return false;
+    }
+
+    private boolean validMajor(Major major){
+        switch(major) {
+            case BA:
+            case CS:
+            case EE:
+            case IT:
+            case ME:
+                return true;
+        }
+        return false;
     }
 }
