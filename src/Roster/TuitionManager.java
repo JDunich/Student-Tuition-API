@@ -20,7 +20,6 @@ public class TuitionManager {
             }
 
             if(isPrint(command)) continue;
-            if(missingNameMajor(s)) continue;
             task(command, input);
 
 
