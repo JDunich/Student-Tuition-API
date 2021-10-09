@@ -69,10 +69,23 @@ public class TuitionManager {
                     System.out.println("Student is not in the roster.");
                 }
             }else if(command.matches("T")){
+                double payment = Double.parseDouble(input.nextToken());
+                Date date = new Date(input.nextToken());
+                
+                //find student, if not found, exit and print failure method
+                //check if date valid, if date invalid, exit and print 
+                //use setDate method
+                //use setPayment method
+                //print tuition updated
+                
 
             }else if(command.matches("S")){
+                //find international student
+                
+                //implement setStatus() method
 
             }else if(command.matches("F")){
+                
 
             }
         }

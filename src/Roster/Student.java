@@ -14,14 +14,14 @@ public class Student {
                 this.credit = credit;
                 payment = 0;
                 date = null;
-                tuitionDue();
+                tuitionDue = 0;
         }
         
         public Student(Profile profile){
                 this.profile = profile;
                 payment = 0;
                 date = null;
-                tuitionDue();
+                tuitionDue = 0;
         }
         
         public void tuitionDue() {
@@ -41,6 +41,10 @@ public class Student {
                     separator + payment + separator + "last payment date " + date.toString() + separator;
             String result =  profileString + tuitionString;
             return result;
+        }
+        
+        public int getCredits() {
+            return credit;
         }
         
         public void setCredits(int credit) {

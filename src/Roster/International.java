@@ -15,12 +15,20 @@ public class International extends NonResident {
     @Override
     public String toString(){
         String separator = ":";
-        String result = super.toString();
-        return result + separator + "international";
+        String result = super.toString() + separator + "international";
+        if(abroad) {
+            return result + separator + "study aborad";
+        }
+        return result;
     }
     
     public void setStatus() {
         this.abroad = true;
-        super.setCredits(12);
+        if(super.getCredits() > 12) {
+            super.setCredits(12);
+        }
+        super.setPayment(0);
+        super.setDate(null);
+        tuitionDue();
     }
 }
