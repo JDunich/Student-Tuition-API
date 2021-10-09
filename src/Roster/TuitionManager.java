@@ -13,21 +13,21 @@ public class TuitionManager {
         while(true){
             String s = sc.nextLine();
             StringTokenizer input = new StringTokenizer(s, ",");
-            String command = input.nextToken();
-            if(notValid(command)){
-                System.out.println("Command '" + command + "' not supported!");
+            if(notValid(s)){
+                System.out.println("Command '" + s + "' not supported!");
                 continue;
             }
 
+            String command = input.nextToken();
             if(isPrint(command)) continue;
             else{
-                if(badInfo(s)) continue;
+                if(badInfo) continue;
                 else task(command, input);
             }
 
         }
     }
-    private void task(String command, StringTokenizer input){
+    private Student task(String command, StringTokenizer input){
         String name = input.nextToken();
         Major major = Major.valueOf(input.nextToken());
         Student student = null;
@@ -70,32 +70,7 @@ public class TuitionManager {
             }
         }
 
-    }
 
-    private boolean notValid(String s){
-        StringTokenizer temp = new StringTokenizer(s, ",");
-        String command = temp.nextToken();
-        return command.matches("AR|AN|AT|AI|R|T|S|F|P|PN|PT");
-    }
-
-    private boolean isPrint(String command){
-        switch(command){
-            case("C"):
-                break;
-            case("P"):
-                break;
-            case("PN"):
-                break;
-            case("PT"):
-                break;
-
-            return false;
-        }
-    }
-
-    private boolean badInfo(String s){
-        StringTokenizer temp = new StringTokenizer(s, ",");
 
     }
-
 }
