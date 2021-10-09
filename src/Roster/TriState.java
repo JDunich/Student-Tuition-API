@@ -2,7 +2,7 @@ package Roster;
 
 public class TriState extends NonResident{
     private String state;
-    
+    private final int TRI_DISCOUNT = 4000;
     public TriState(Profile profile, int credit, String state) {
         super(profile, credit);
         this.state = state;
@@ -10,6 +10,7 @@ public class TriState extends NonResident{
 
     @Override
     public void tuitionDue() {
+        setTuitionDue(getTuitionDue()-TRI_DISCOUNT);
     }
     
     @Override

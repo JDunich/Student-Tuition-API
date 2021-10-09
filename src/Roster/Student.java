@@ -55,7 +55,15 @@ public class Student {
             this.payment = payment;
             tuitionDue = tuitionDue - payment;
         }
-        
+
+        public void setTuitionDue(double tuition){
+            this.tuitionDue = tuition;
+        }
+
+        public double getTuitionDue(){
+            return tuitionDue;
+        }
+
         public void setDate(Date date) {
             this.date = date;
         }
