@@ -6,8 +6,13 @@ public class Student {
         private double tuitionDue;
         private double payment;
         private Date date;
+        private final int minCredits = 12;
+        private final int maxCredits = 16;
+        private static final int TUITION_FEE = 29737;
+        private static final int FEE_PER_CREDIT = 966;
         private static final int FULL_TIME_FEE = 3268;
         private static final double PART_TIME_FEE = FULL_TIME_FEE * .80;
+        private static final int ADDITIONAL_FEE = 2650;
 
         public Student(Profile profile, int credit){
                 this.profile = profile;
@@ -66,5 +71,39 @@ public class Student {
 
         public void setDate(Date date) {
                 this.date = date;
+        }
+
+        public int studentType(int credit){
+                if(credit > 16) return 1;
+                if(credit >= 12) return 0;
+                return -1;
+        }
+
+        public int getMinCredits(){
+                return minCredits;
+        }
+
+        public int getMaxCredits(){
+                return maxCredits;
+        }
+
+        public int getTuitionFee(){
+                return TUITION_FEE;
+        }
+
+        public int getFeePerCredit(){
+               return FEE_PER_CREDIT;
+        }
+
+        public int getFullTimeFee(){
+                return FULL_TIME_FEE;
+        }
+
+        public double getPartTimeFee(){
+                return PART_TIME_FEE;
+        }
+
+        public int getAdditionalFee(){
+                return ADDITIONAL_FEE;
         }
 }

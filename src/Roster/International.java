@@ -10,6 +10,17 @@ public class International extends NonResident {
 
     @Override
     public void tuitionDue() {
+        double tuition = 0;
+        switch(super.studentType(super.getCredits())){
+            case 0:
+                tuition = getTuitionFee();
+                break;
+            case 1:
+                tuition = getTuitionFee() + ((super.getCredits() - getMaxCredits()) * getFeePerCredit());
+                break;
+        }
+        if(!abroad) tuition += getFullTimeFee();
+        setTuitionDue(tuition);
     }
 
     @Override
