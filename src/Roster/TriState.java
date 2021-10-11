@@ -12,6 +12,11 @@ public class TriState extends NonResident{
     public void tuitionDue() {
         setTuitionDue(getTuitionDue()-TRI_DISCOUNT);
     }
+    
+    @Override
+    public void tuitionDue() {
+        setTuitionDue(getTuitionDue()-TRI_DISCOUNT);
+    }
 
 
     @Override
