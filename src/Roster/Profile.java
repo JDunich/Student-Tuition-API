@@ -1,7 +1,18 @@
 package Roster;
 
+/**
+ * Makes unique student based on name and major
+ * @author Jack Dunich
+ * @author Kiana Perst
+ */
 public class Profile {
+    /**
+     * name of student
+     */
     private String name;
+    /**
+     * major of student
+     */
     private Major major;
 
     /**

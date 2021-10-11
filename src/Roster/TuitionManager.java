@@ -3,15 +3,30 @@ package Roster;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
+/**
+ * Handles command line inputs, constructs roster
+ * @author Jack Dunich
+ * @author Kiana Perst
+ */
 public class TuitionManager {
+    /**
+     * new roster
+     */
     Roster arr = new Roster();
+    /**
+     * running boolean
+     */
     private boolean running = true;
 
+    /**
+     * reading the inputs, checking if they are valid, passing them through
+     */
     public void run(){
         System.out.println("Tuition Manager starts running.");
         Scanner sc = new Scanner(System.in);
         while(running){
             String s = sc.nextLine();
+            if(s.isEmpty()) continue;
             StringTokenizer input = new StringTokenizer(s, ",");
             String command = input.nextToken();
             if(!notValid(command)){
@@ -25,7 +40,12 @@ public class TuitionManager {
         }
         sc.close();
     }
-    
+
+    /**
+     * preforms task based on the command given
+     * @param command given command
+     * @param input given data
+     */
     private void task(String command, StringTokenizer input){
         if(!input.hasMoreTokens()){
             System.out.println("Missing data in command line.");
@@ -110,7 +130,7 @@ public class TuitionManager {
                 }
                 double payment = Double.parseDouble(input.nextToken());
                 if(!input.hasMoreTokens()){
-                    System.out.println("Date missing.");
+                    System.out.println("Invalid amount.");
                     return;
                 }
                 Date date = new Date(input.nextToken());
@@ -140,21 +160,28 @@ public class TuitionManager {
                 double aid = Double.parseDouble(input.nextToken());
                 student.setAid(aid);
                 if(arr.financialAid(student)) {
-                    System.out.println("Tuition updated");
+                    System.out.println("Tuition updated.");
                 }
 
             }
         }
-
-
-
     }
 
+    /**
+     * checks if command is valid
+     * @param command given command
+     * @return boolean based on if it matches
+     */
     private boolean notValid(String command){
         if(command.matches("AR|AN|AT|AI|R|T|S|F|P|PN|PT|C|Q")) return true;
         else return false;
     }
 
+    /**
+     * checks if command is a print statement, if true does task
+     * @param command given command
+     * @return boolean based on if it is a print statement
+     */
     private boolean isPrint(String command){
         switch(command) {
             case "P":
@@ -182,6 +209,11 @@ public class TuitionManager {
         return false;
     }
 
+    /**
+     * if major is in enum
+     * @param major given major
+     * @return true if in enum class
+     */
     private boolean validMajor(String major){
         switch(major.toUpperCase()) {
             case "BA":
@@ -193,7 +225,12 @@ public class TuitionManager {
         }
         return false;
     }
-    
+
+    /**
+     * if credit is valid
+     * @param credit given credit
+     * @return boolean based on credit given
+     */
     private boolean validCredit(int credit){
         int max_credits = 24;
         int min_credits = 3;
@@ -212,7 +249,12 @@ public class TuitionManager {
         }
         return true;
     }
-    
+
+    /**
+     * is valid credit for international student
+     * @param credit given credit
+     * @return boolean based on if valid
+     */
     private boolean validInternationalCredit(int credit){
         int min_credits = 12;
         if(credit < min_credits) {

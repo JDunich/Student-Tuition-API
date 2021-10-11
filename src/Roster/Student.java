@@ -1,127 +1,225 @@
 package Roster;
 
+import java.text.DecimalFormat;
+
+/**
+ * Student Class
+ * @author Jack Dunich
+ * @author Kiana Perst
+ */
 public class Student {
-        private Profile profile;
-        private int credit;
-        private double tuitionDue;
-        private double totalPayment;
-        private Date date;
-        private double financialAid;
-        private static final int TWELVE_CREDITS = 12;
-        private static final int SIXTEEN_CREDITS = 16;
-        private static final int FULL_TIME_FEE = 3268;
-        private static final double PART_TIME_FEE = FULL_TIME_FEE * .80;
+    /**
+     * profile for student
+     */
+    private Profile profile;
+    /**
+     * credit
+     */
+    private int credit;
+    /**
+     * tuition due
+     */
+    private double tuitionDue;
+    /**
+     * total payment
+     */
+    private double totalPayment;
+    /**
+     * date
+     */
+    private Date date;
+    /**
+     * financial aid
+     */
+    private double financialAid;
+    /**
+     * 12 credits
+     */
+    public static final int TWELVE_CREDITS = 12;
+    /**
+     * 16 credits
+     */
+    public static final int SIXTEEN_CREDITS = 16;
+    /**
+     * full time fee
+     */
+    public static final int FULL_TIME_FEE = 3268;
+    /**
+     * parttime fee
+     */
+    public static final double PART_TIME_FEE = FULL_TIME_FEE * .80;
 
-        public Student(Profile profile, int credit){
-                this.profile = profile;
-                this.credit = credit;
-                totalPayment = 0;
-                date = null;
-                tuitionDue = 0;
-                financialAid = 0;
-        }
-
-        public Student(Profile profile){
-                this.profile = profile;
-                totalPayment = 0;
-                date = null;
-                tuitionDue = 0;
-                financialAid = 0;
-        }
-
-        public void tuitionDue() {
-                
-        }
-
-        @Override
-        public String toString(){
-                String separator = ":";
-                String dateString;
-                if(date == null) {
-                    dateString = "last payment date: " + "--/--/----" + separator;
-                }
-                else {
-                    dateString = "last payment date " + date.toString() + separator;
-                }
-                String profileString = profile.toString() + credit + " credit hours" + separator;
-                String tuitionString = "tuition due" + separator + tuitionDue + separator + "total payment" +
-                        separator + totalPayment + separator;
-                String result =  profileString + tuitionString + dateString;
-                return result;
-        }
-
-        public String getName(){
-                return profile.getName();
-        }
-
-        public int getCredits() {
-                return credit;
-        }
-
-        public void setCredits(int credit) {
-                this.credit = credit;
-        }
-
-        public double getTotalPayment() {
-                return totalPayment;
-        }
-        
-        public void setPayment(double payment) {
-            totalPayment = payment;
+    /**
+     * Student constructor
+     * @param profile student profile
+     * @param credit credit number
+     */
+    public Student(Profile profile, int credit){
+        this.profile = profile;
+        this.credit = credit;
+        totalPayment = 0;
+        date = null;
+        tuitionDue = 0;
+        financialAid = 0;
     }
 
-        public void setTotalPayment(double payment) {
-                totalPayment += payment;
-                tuitionDue = tuitionDue - payment;
-        }
+    /**
+     * Student Constructor
+     * @param profile student profile
+     */
+    public Student(Profile profile){
+        this.profile = profile;
+        totalPayment = 0;
+        date = null;
+        tuitionDue = 0;
+        financialAid = 0;
+    }
 
-        public void setTuitionDue(double tuition){
-                this.tuitionDue = tuition;
-        }
+    /**
+     * empty void
+     */
+    public void tuitionDue() {
 
-        public double getTuitionDue(){
-                return tuitionDue;
-        }
+    }
 
-        public void setDate(Date date) {
-                this.date = date;
+    /**
+     * Formats string
+     * @return formatted string
+     */
+    @Override
+    public String toString(){
+        String separator = ":";
+        String dateString;
+        DecimalFormat decimalFormat = new DecimalFormat("#0.00");
+        decimalFormat.setGroupingUsed(true);
+        decimalFormat.setGroupingSize(3);
+        if(date == null) {
+            dateString = "last payment date: " + "--/--/--" + separator;
         }
+        else {
+            dateString = "last payment date: " + date.toString() + separator;
+        }
+        String profileString = profile.toString() + credit + " credit hours" + separator;
+        String tuitionString = "tuition due" + separator + decimalFormat.format(tuitionDue) + separator + "total payment" +
+                separator + decimalFormat.format(totalPayment) + separator;
+        String result =  profileString + tuitionString + dateString;
+        return result;
+    }
 
-        public Date getDate(){
-                return date;
-        }
+    /**
+     * getter for profile
+     * @return Profile
+     */
+    public Profile getProfile() { return profile; }
 
-        public int studentType(int credit){
-                if(credit > 16) return 1;
-                if(credit >= 12) return 0;
-                return -1;
-        }
+    /**
+     * getter for name
+     * @return name
+     */
+    public String getName(){
+        return profile.getName();
+    }
 
-        public int getMinCredits(){
-                return TWELVE_CREDITS;
-        }
+    /**
+     * getter for credits
+     * @return credit number
+     */
+    public int getCredits() {
+        return credit;
+    }
 
-        public int getMaxCredits(){
-                return SIXTEEN_CREDITS;
-        }
+    /**
+     * setter for credits
+     * @param credit
+     */
+    public void setCredits(int credit) {
+        this.credit = credit;
+    }
 
-        public int getFullTimeFee(){
-                return FULL_TIME_FEE;
-        }
+    /**
+     * getter for total payment
+     * @return payment
+     */
+    public double getTotalPayment() {
+        return totalPayment;
+    }
 
-        public double getPartTimeFee(){
-                return PART_TIME_FEE;
-        }
-        
-        public void setAid(double aid) {
-            financialAid = aid;
-        }
-        
-        public double getAid() {
-            return financialAid;
-        }
-        
-        public Profile getProfile() {
-            return profile;
-        }
+    /**
+     * setter for payment
+     * @param payment
+     */
+    public void setPayment(double payment) {
+        totalPayment = payment;
+
+    }
+
+    /**
+     * setter for total payment
+     * @param payment
+     */
+    public void setTotalPayment(double payment) {
+        totalPayment += payment;
+        tuitionDue = tuitionDue - payment;
+    }
+
+    /**
+     * setter for tuition due
+     * @param tuition
+     */
+    public void setTuitionDue(double tuition){
+        this.tuitionDue = tuition;
+    }
+
+    /**
+     * getter for tuition due
+     * @return tuition due
+     */
+    public double getTuitionDue(){
+        return tuitionDue;
+    }
+
+    /**
+     * setter for date
+     * @param date
+     */
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    /**
+     * getter for date
+     * @return date
+     */
+    public Date getDate(){
+        return date;
+    }
+
+    /**
+     * check student type
+     * @param credit
+     * @return 1 if over 16, 0 if over 12, -1 if under 12
+     */
+    public int studentType(int credit){
+        if(credit > 16) return 1;
+        if(credit >= 12) return 0;
+        return -1;
+    }
+
+    /**
+     * setter for aid
+     * @param aid
+     */
+    public void setAid(double aid) {
+        financialAid = aid;
+    }
+
+    /**
+     * getter for aid
+     * @return aid
+     */
+    public double getAid() {
+        return financialAid;
+    }
+
+
 }

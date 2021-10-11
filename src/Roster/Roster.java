@@ -1,24 +1,52 @@
 package Roster;
 
+/**
+ * Manipulates the roster array
+ * @author Jack Dunich
+ * @author Kiana Perst
+ */
 public class Roster {
+    /**
+     * Student array
+     */
     private Student[] roster;
-    private int size; //keep track of the number of students in the roster
+    /**
+     * keep track of the number of students in the roster
+     */
+    private int size;
+    /**
+     * -1 not found
+     */
+    private static final int NOT_FOUND = -1;
 
+    /**
+     * finds a student in the array
+     * @param student studen to find
+     * @return -1 if not found, i index if found
+     */
     private int find(Student student) {
         if (size == 0) grow();
         for(int i = 0; i < size; i++)
             if (roster[i].getProfile().equals(student.getProfile())) return i;
-        return -1;
+        return NOT_FOUND;
     }
 
+    /**
+     * grow array by 4
+     */
     private void grow() {
         Student[] arr = new Student[size+4];
         for(int i = 0; i < size; i++) arr[i] = roster[i];
         roster = arr;
     }
 
+    /**
+     * add student to the array
+     * @param student to add
+     * @return if student was added boolean
+     */
     public boolean add(Student student) {
-        if(find(student) == -1){
+        if(find(student) == NOT_FOUND){
             if(roster[roster.length - 1] == null) grow();
             roster[size] = student;
             size++;
@@ -27,9 +55,14 @@ public class Roster {
         return false;
     }
 
+    /**
+     * remove student from the array
+     * @param student to remove
+     * @return if student was removed boolean
+     */
     public boolean remove(Student student) {
         int i = find(student);
-        if(i == -1) return false;
+        if(i == NOT_FOUND) return false;
         Student[] temp = new Student[roster.length];
         for(int j = 0; j < i; j++) temp[j] = roster[j];
         for(i = i+1; i < size; i++) temp[i-1] = roster[i];
@@ -38,6 +71,9 @@ public class Roster {
         return true;
     }
 
+    /**
+     * print the roster
+     */
     public void print() {
         if (size == 0) {
             System.out.println("Student roster is empty!");
@@ -49,7 +85,10 @@ public class Roster {
             System.out.println("* end of roster **");
         }
     }
-    
+
+    /**
+     * print the roster by name
+     */
     public void printName() {
         if (size == 0) {
             System.out.println("Student roster is empty!");
@@ -63,6 +102,9 @@ public class Roster {
         }
     }
 
+    /**
+     * print the roster by payment date
+     */
     public void printPaymentDate(){
         if (size == 0) {
             System.out.println("Student roster is empty!");
@@ -75,7 +117,11 @@ public class Roster {
             System.out.println("* end of roster **");
         }
     }
-    
+
+    /**
+     * calculate tuition due for all students
+     * @return boolean if there are students to calculate
+     */
     public boolean calculate() {
         if (size == 0) {
             return false;
@@ -86,11 +132,15 @@ public class Roster {
             return true;
         }
     }
-    
+
+    /**
+     * set internation abroad status to true
+     * @param student to change status
+     * @return boolean if international student found
+     */
     public boolean setStatus(Student student) {
         int index = find(student);
-        if(index == -1 || !(roster[index] instanceof International)){
-            System.out.println("here");
+        if(index == NOT_FOUND || !(roster[index] instanceof International)){
             return false;
         }
         International temp = (International)roster[index];
@@ -98,10 +148,15 @@ public class Roster {
         roster[index] = temp;
         return true;
     }
-    
+
+    /**
+     * calculate financial aid for student
+     * @param student to calculate financial aid
+     * @return boolean if student is eligible
+     */
     public boolean financialAid(Student student) {
         int index = find(student);
-        if(index == -1 ){
+        if(index == NOT_FOUND ){
             System.out.println("Student not in the roster.");
             return false;
         }
@@ -109,12 +164,12 @@ public class Roster {
             System.out.println("Not a resident student.");
             return false;
         }
-        if(roster[index].getCredits() < roster[index].getMinCredits()) {
-            System.out.println("Parttime student doesn't qualify for the award");
+        if(roster[index].getCredits() < roster[index].TWELVE_CREDITS) {
+            System.out.println("Parttime student doesn't qualify for the award.");
             return false;
         }
         if(roster[index].getAid() != 0) {
-            System.out.println("Awarded once already");
+            System.out.println("Awarded once already.");
             return false;
         }
         if(student.getAid() > 10000 || student.getAid() < 0) {
@@ -124,10 +179,15 @@ public class Roster {
         roster[index].setAid(student.getAid());
         return true;
     }
-    
+
+    /**
+     * student to pay
+     * @param student who is paying
+     * @return boolean if student pays valid about and exists in roster
+     */
     public boolean pay(Student student) {
         int index = find(student);
-        if(index == -1 ){
+        if(index == NOT_FOUND ){
             System.out.println("Student not in the roster.");
             return false;
         }
@@ -144,6 +204,9 @@ public class Roster {
         return true;
     }
 
+    /**
+     * order roster by names
+     */
     private void orderNames(){
         for(int i = 0; i < size; i++){
             for(int j = i+1; j < size; j++){
@@ -156,6 +219,10 @@ public class Roster {
         }
     }
 
+    /**
+     * order roster by payment date
+     * @return Student array of payment ordered by date
+     */
     private Student[] orderPayment(){
         Student[] arr = new Student[size];
         int count = 0;
