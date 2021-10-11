@@ -6,3 +6,8 @@
 /.idea/vcs.xml
 /bin/
 /.idea/.gitignore
+.classpath
+.project
+*.class
+/bin/
+.DS_Store

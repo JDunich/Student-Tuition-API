@@ -14,7 +14,7 @@ public class TuitionManager {
             String s = sc.nextLine();
             StringTokenizer input = new StringTokenizer(s, ",");
             String command = input.nextToken();
-            if(notValid(command)){
+            if(!notValid(command)){
                 System.out.println("Command '" + s + "' not supported!");
                 continue;
             }
@@ -44,8 +44,25 @@ public class TuitionManager {
         Profile profile = null;
         Student student = null;
         if(command.matches("AR|AN|AT|AI")) {
-            int credit = Integer.parseInt(input.nextToken());
-            if(command.matches("AR|AN")){
+            int credit;
+            
+            if(!input.hasMoreTokens()){
+                System.out.println("Credit hours missing.");
+                return;
+            }
+            
+            try {
+                credit = Integer.parseInt(input.nextToken());
+            }catch(Exception e) {
+                System.out.println("Invalid credit hours.");
+                return;
+            }
+            
+            if(command.matches("AR")){
+                profile = new Profile(name, major);
+                student = new Resident(profile, credit);
+            }
+            if(command.matches("AN")){
                 profile = new Profile(name, major);
                 student = new NonResident(profile, credit);
             }
@@ -59,6 +76,9 @@ public class TuitionManager {
                 if(input.nextToken().equalsIgnoreCase("true")) abroad = true; 
                 profile = new Profile(name, major);
                 student = new International(profile, credit, abroad);
+            }
+            if(!validCredit(student)) {
+                return;
             }
             if(arr.add(student)){
                 System.out.println("Student added.");
@@ -134,5 +154,25 @@ public class TuitionManager {
                 return true;
         }
         return false;
+    }
+    
+    private boolean validCredit(Student student){
+        if(student.getCredits() > student.getMaxCredits()) {
+            System.out.println("Credit hours exceed the maximum 24.");
+            return false;
+        }
+        else if(student.getCredits() < student.getMinCredits()) {
+            if(student.getMinCredits() == 12) {
+                System.out.println("International students must enroll at least 12 credits.");
+            }
+            else if(student.getCredits() < 0){
+                System.out.println("Credit hours cannot be negative.");
+            }
+            else {
+                System.out.println("Minimum credit hours is 3.");
+            }
+            return false;
+        }
+        return true;
     }
 }
