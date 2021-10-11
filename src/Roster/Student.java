@@ -9,7 +9,7 @@ public class Student {
         private double financialAid;
         private static final int TWELVE_CREDITS = 12;
         private static final int SIXTEEN_CREDITS = 16;
-        private static final int FULL_TIME_FEE = 3268;
+        private static final double FULL_TIME_FEE = 3268;
         private static final double PART_TIME_FEE = FULL_TIME_FEE * .80;
 
         public Student(Profile profile, int credit){
@@ -105,7 +105,7 @@ public class Student {
                 return SIXTEEN_CREDITS;
         }
 
-        public int getFullTimeFee(){
+        public double getFullTimeFee(){
                 return FULL_TIME_FEE;
         }
 
