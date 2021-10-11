@@ -1,16 +1,16 @@
 package Roster;
 
-import java.util.Locale;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
 public class TuitionManager {
     Roster arr = new Roster();
+    private boolean running = true;
 
     public void run(){
         System.out.println("Tuition Manager starts running.");
         Scanner sc = new Scanner(System.in);
-        while(true){
+        while(running){
             String s = sc.nextLine();
             StringTokenizer input = new StringTokenizer(s, ",");
             String command = input.nextToken();
@@ -22,8 +22,8 @@ public class TuitionManager {
             if(isPrint(command)) continue;
             task(command, input);
 
-
         }
+        sc.close();
     }
     
     private void task(String command, StringTokenizer input){
@@ -36,11 +36,12 @@ public class TuitionManager {
             System.out.println("Missing data in command line.");
             return;
         }
-        Major major = Major.valueOf((input.nextToken()).toUpperCase());
-        if(!validMajor(major)){
-            System.out.println("'" + major + "'" + " is not a valid major.");
+        String major_str = input.nextToken();
+        if(!validMajor(major_str)){
+            System.out.println("'" + major_str + "'" + " is not a valid major.");
             return;
         }
+        Major major = Major.valueOf(major_str.toUpperCase());
         Profile profile = new Profile(name, major);
         Student student = null;
         if(command.matches("AR|AN|AT|AI")) {
@@ -69,7 +70,15 @@ public class TuitionManager {
                 student = new NonResident(profile, credit);
             }
             if(command.matches("AT")){
-                String city = input.nextToken();
+                if(!input.hasMoreTokens()){
+                    System.out.println("Missing data in command line.");
+                    return;
+                }
+                String city = input.nextToken().toUpperCase();
+                if(!city.matches("NY|CT")) {
+                    System.out.println("Not part of the tri-state area.");
+                    return;
+                }
                 student = new TriState(profile, credit, city);
             }
             if(command.matches("AI")){
@@ -95,15 +104,25 @@ public class TuitionManager {
                     System.out.println("Student is not in the roster.");
                 }
             }else if(command.matches("T")){
+                if(!input.hasMoreTokens()){
+                    System.out.println("Payment amount missing.");
+                    return;
+                }
                 double payment = Double.parseDouble(input.nextToken());
+                if(!input.hasMoreTokens()){
+                    System.out.println("Date missing.");
+                    return;
+                }
                 Date date = new Date(input.nextToken());
-                
-                //find student, if not found, exit and print failure method
-                //check if date valid, if date invalid, exit and print 
-                //use setDate method
-                //use setPayment method
-                //print tuition updated
-                
+                if(!date.isValid()){
+                    System.out.println("Payment date invalid.");
+                    return;
+                }
+                student.setDate(date);
+                student.setTotalPayment(payment);
+                if(arr.pay(student)) {
+                    System.out.println("Payment applied.");
+                }
 
             }else if(command.matches("S")){
                 if(arr.setStatus(student)) {
@@ -116,9 +135,13 @@ public class TuitionManager {
             }else if(command.matches("F")){
                 if(!input.hasMoreTokens()){
                     System.out.println("Missing the amount.");
+                    return;
                 }
-                
-                
+                double aid = Double.parseDouble(input.nextToken());
+                student.setAid(aid);
+                if(arr.financialAid(student)) {
+                    System.out.println("Tuition updated");
+                }
 
             }
         }
@@ -152,18 +175,20 @@ public class TuitionManager {
                 }
                 return true;
             case "Q":
+                running = false;
+                System.out.println("Tuition Manager terminated.");
                 return true;
         }
         return false;
     }
 
-    private boolean validMajor(Major major){
-        switch(major) {
-            case BA:
-            case CS:
-            case EE:
-            case IT:
-            case ME:
+    private boolean validMajor(String major){
+        switch(major.toUpperCase()) {
+            case "BA":
+            case "CS":
+            case "EE":
+            case "IT":
+            case "ME":
                 return true;
         }
         return false;
@@ -176,7 +201,7 @@ public class TuitionManager {
             System.out.println("Credit hours exceed the maximum 24.");
             return false;
         }
-        else if(credit <= min_credits) {
+        else if(credit < min_credits) {
             if(credit < 0){
                 System.out.println("Credit hours cannot be negative.");
             }
@@ -190,7 +215,7 @@ public class TuitionManager {
     
     private boolean validInternationalCredit(int credit){
         int min_credits = 12;
-        if(credit <= min_credits) {
+        if(credit < min_credits) {
             System.out.println("International students must enroll at least 12 credits.");
             return false;
         }

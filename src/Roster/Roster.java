@@ -7,7 +7,7 @@ public class Roster {
     private int find(Student student) {
         if (size == 0) grow();
         for(int i = 0; i < size; i++)
-            if (roster[i].equals(student)) return i;
+            if (roster[i].getProfile().equals(student.getProfile())) return i;
         return -1;
     }
 
@@ -89,12 +89,58 @@ public class Roster {
     
     public boolean setStatus(Student student) {
         int index = find(student);
-        if(index == -1 || (roster[index] instanceof International)){
+        if(index == -1 || !(roster[index] instanceof International)){
+            System.out.println("here");
             return false;
         }
         International temp = (International)roster[index];
         temp.setStatus();
         roster[index] = temp;
+        return true;
+    }
+    
+    public boolean financialAid(Student student) {
+        int index = find(student);
+        if(index == -1 ){
+            System.out.println("Student not in the roster.");
+            return false;
+        }
+        if(!(roster[index] instanceof Resident)) {
+            System.out.println("Not a resident student.");
+            return false;
+        }
+        if(roster[index].getCredits() < roster[index].getMinCredits()) {
+            System.out.println("Parttime student doesn't qualify for the award");
+            return false;
+        }
+        if(roster[index].getAid() != 0) {
+            System.out.println("Awarded once already");
+            return false;
+        }
+        if(student.getAid() > 10000 || student.getAid() < 0) {
+            System.out.println("Invalid amount.");
+            return false;
+        }
+        roster[index].setAid(student.getAid());
+        return true;
+    }
+    
+    public boolean pay(Student student) {
+        int index = find(student);
+        if(index == -1 ){
+            System.out.println("Student not in the roster.");
+            return false;
+        }
+        if(student.getTotalPayment() <= 0) {
+            System.out.println("Invalid amount.");
+            return false;
+        }
+        if(student.getTotalPayment() > roster[index].getTuitionDue()) {
+            System.out.println("Amount is greater than amount due.");
+            return false;
+        }
+        roster[index].setTotalPayment(student.getTotalPayment());
+        roster[index].setDate(student.getDate());
         return true;
     }
 
@@ -128,7 +174,7 @@ public class Roster {
             Student key = arr[i];
             int j = i - 1;
             Date temp = key.getDate();
-            while (j >= 0 && temp.compareTo(roster[j].getDate()) > 0) {
+            while (j >= 0 && temp.compareTo(arr[j].getDate()) > 0) {
                 arr[j + 1] = arr[j];
                 j = j - 1;
             }

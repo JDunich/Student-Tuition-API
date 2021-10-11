@@ -151,7 +151,7 @@ public class Date implements Comparable<Date> {
         Date curr_date = new Date();
         int max_days;
 
-        //check if the year is invalid (before 1980 or past the current year)
+        //check if the year is invalid (before 2021 or past the current year)
         if ((year < TWENTY_TWENTY_ONE) || (year > curr_date.year)) {
             return false;
         }

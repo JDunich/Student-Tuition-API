@@ -32,7 +32,7 @@ public class International extends NonResident {
         if(super.getCredits() > 12) {
             super.setCredits(12);
         }
-        super.setPayment(0);
+        setPayment(0);
         super.setDate(null);
         tuitionDue();
     }

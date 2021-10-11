@@ -6,6 +6,7 @@ public class Student {
         private double tuitionDue;
         private double totalPayment;
         private Date date;
+        private double financialAid;
         private static final int TWELVE_CREDITS = 12;
         private static final int SIXTEEN_CREDITS = 16;
         private static final int FULL_TIME_FEE = 3268;
@@ -17,6 +18,7 @@ public class Student {
                 totalPayment = 0;
                 date = null;
                 tuitionDue = 0;
+                financialAid = 0;
         }
 
         public Student(Profile profile){
@@ -24,6 +26,7 @@ public class Student {
                 totalPayment = 0;
                 date = null;
                 tuitionDue = 0;
+                financialAid = 0;
         }
 
         public void tuitionDue() {
@@ -33,10 +36,17 @@ public class Student {
         @Override
         public String toString(){
                 String separator = ":";
+                String dateString;
+                if(date == null) {
+                    dateString = "last payment date: " + "--/--/----" + separator;
+                }
+                else {
+                    dateString = "last payment date " + date.toString() + separator;
+                }
                 String profileString = profile.toString() + credit + " credit hours" + separator;
                 String tuitionString = "tuition due" + separator + tuitionDue + separator + "total payment" +
-                        separator + totalPayment + separator + "last payment date " + date.toString() + separator;
-                String result =  profileString + tuitionString;
+                        separator + totalPayment + separator;
+                String result =  profileString + tuitionString + dateString;
                 return result;
         }
 
@@ -55,9 +65,13 @@ public class Student {
         public double getTotalPayment() {
                 return totalPayment;
         }
+        
+        public void setPayment(double payment) {
+            totalPayment = payment;
+    }
 
-        public void setPayment(int payment) {
-                this.totalPayment += payment;
+        public void setTotalPayment(double payment) {
+                totalPayment += payment;
                 tuitionDue = tuitionDue - payment;
         }
 
@@ -97,5 +111,17 @@ public class Student {
 
         public double getPartTimeFee(){
                 return PART_TIME_FEE;
+        }
+        
+        public void setAid(double aid) {
+            financialAid = aid;
+        }
+        
+        public double getAid() {
+            return financialAid;
+        }
+        
+        public Profile getProfile() {
+            return profile;
         }
 }

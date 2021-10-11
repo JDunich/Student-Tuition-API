@@ -13,11 +13,19 @@ public class TriState extends NonResident{
     public void tuitionDue() {
         super.tuitionDue();
         double tuition = super.getTuitionDue();
-        if(state.equals("NY")) {
-            setTuitionDue(tuition - NY_TRI_DISCOUNT);
-        }
-        else {
-            setTuitionDue(tuition - CT_TRI_DISCOUNT);
+        switch(studentType(getCredits())){
+            case 0: case 1:
+                if(state.equals("NY")) {
+                    setTuitionDue(tuition - NY_TRI_DISCOUNT);
+                }
+                else {
+                    setTuitionDue(tuition - CT_TRI_DISCOUNT);
+                }
+                break;
+
+            case -1:
+                setTuitionDue(tuition);
+                break;
         }
     }
 
