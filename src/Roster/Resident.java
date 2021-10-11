@@ -23,6 +23,7 @@ public class Resident extends Student {
         setTuitionDue(tuition);
     }
 
+
     @Override
     public String toString(){
         String result = super.toString();

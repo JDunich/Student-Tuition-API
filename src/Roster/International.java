@@ -23,6 +23,8 @@ public class International extends NonResident {
         setTuitionDue(tuition);
     }
 
+
+
     @Override
     public String toString(){
         String separator = ":";

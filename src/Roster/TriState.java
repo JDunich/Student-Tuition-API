@@ -13,6 +13,7 @@ public class TriState extends NonResident{
         setTuitionDue(getTuitionDue()-TRI_DISCOUNT);
     }
 
+
     @Override
     public String toString(){
         String separator = ":";

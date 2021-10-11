@@ -40,7 +40,7 @@ public class Roster {
 
     public void print() {
         if (size == 0) {
-            System.out.println("Student roseter is empty!");
+            System.out.println("Student roster is empty!");
         } else {
             System.out.println("* list of students in the roster **");
             for (int i = 0; i < size; i++) {
@@ -48,5 +48,60 @@ public class Roster {
             }
             System.out.println("* end of roster **");
         }
+    }
+    
+    public void printName() {
+        if (size == 0) {
+            System.out.println("Student roster is empty!");
+        } else {
+            orderNames();
+            System.out.println("* list of students ordered by name **");
+            for (int i = 0; i < size; i++) {
+                System.out.println(roster[i].toString());
+            }
+            System.out.println("* end of roster **");
+        }
+    }
+
+    public void printPaymentDate(){
+        if (size == 0) {
+            System.out.println("Student roster is empty!");
+        } else {
+            Student[] temp = orderPayment();
+            System.out.println("* list of students made payments ordered by payment date **");
+            for (int i = 0; i < temp.length; i++) {
+                System.out.println(roster[i].toString());
+            }
+            System.out.println("* end of roster **");
+        }
+    }
+
+    private void orderNames(){
+        for(int i = 0; i < size; i++){
+            for(int j = i+1; j < size; j++){
+                if(roster[i].getName().compareTo(roster[j].getName()) > 0){
+                    Student temp = roster[i];
+                    roster[i] = roster[j];
+                    roster[j] = temp;
+                }
+            }
+        }
+    }
+
+    private Student[] orderPayment(){
+        Student[] arr = new Student[size];
+        int count = size;
+        for(int i = 0; i < size; i++) arr[i] = roster[i];
+        for (int i = 1; i < size; i++) {
+            Student key = arr[i];
+            int j = i - 1;
+            Date temp = key.getDate();
+            while (j >= 0 && temp.compareTo(roster[j].getDate()) > 0) {
+                arr[j + 1] = arr[j];
+                j = j - 1;
+            }
+            arr[j + 1] = key;
+        }
+
     }
 }

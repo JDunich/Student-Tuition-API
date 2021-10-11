@@ -5,6 +5,7 @@ public class Student {
         private int credit;
         private double tuitionDue;
         private double payment;
+        private double totalPayment;
         private Date date;
         private final int minCredits = 12;
         private final int maxCredits = 16;
@@ -17,6 +18,7 @@ public class Student {
         public Student(Profile profile, int credit){
                 this.profile = profile;
                 this.credit = credit;
+                totalPayment = 0;
                 payment = 0;
                 date = null;
                 tuitionDue = 0;
@@ -24,6 +26,7 @@ public class Student {
 
         public Student(Profile profile){
                 this.profile = profile;
+                totalPayment = 0;
                 payment = 0;
                 date = null;
                 tuitionDue = 0;
@@ -48,6 +51,10 @@ public class Student {
                 return result;
         }
 
+        public String getName(){
+                return profile.getName();
+        }
+
         public int getCredits() {
                 return credit;
         }
@@ -56,7 +63,12 @@ public class Student {
                 this.credit = credit;
         }
 
+        public double getTotalPayment() {
+                return totalPayment;
+        }
+
         public void setPayment(int payment) {
+                this.totalPayment += payment;
                 this.payment = payment;
                 tuitionDue = tuitionDue - payment;
         }
@@ -71,6 +83,10 @@ public class Student {
 
         public void setDate(Date date) {
                 this.date = date;
+        }
+
+        public Date getDate(){
+                return date;
         }
 
         public int studentType(int credit){
