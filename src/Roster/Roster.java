@@ -70,7 +70,7 @@ public class Roster {
             Student[] temp = orderPayment();
             System.out.println("* list of students made payments ordered by payment date **");
             for (int i = 0; i < temp.length; i++) {
-                System.out.println(roster[i].toString());
+                System.out.println(temp[i].toString());
             }
             System.out.println("* end of roster **");
         }
@@ -90,9 +90,19 @@ public class Roster {
 
     private Student[] orderPayment(){
         Student[] arr = new Student[size];
-        int count = size;
-        for(int i = 0; i < size; i++) arr[i] = roster[i];
-        for (int i = 1; i < size; i++) {
+        int count = 0;
+        int k = 0;
+        while(k != size){
+            if(roster[k].getTotalPayment() != 0){
+                arr[count] = roster[k];
+                count++;
+                k++;
+                continue;
+            }
+            k++;
+        }
+
+        for (int i = 1; i < count; i++) {
             Student key = arr[i];
             int j = i - 1;
             Date temp = key.getDate();
@@ -102,6 +112,8 @@ public class Roster {
             }
             arr[j + 1] = key;
         }
-
+        Student[] temp = new Student[count];
+        for(int i = 0; i < count; i++) temp[i] = arr[i];
+        return temp;
     }
 }
