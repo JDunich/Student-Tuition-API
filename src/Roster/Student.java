@@ -130,7 +130,7 @@ public class Student {
 
     /**
      * setter for credits
-     * @param credit
+     * @param credit given credit
      */
     public void setCredits(int credit) {
         this.credit = credit;
@@ -146,7 +146,7 @@ public class Student {
 
     /**
      * setter for payment
-     * @param payment
+     * @param payment given payment
      */
     public void setPayment(double payment) {
         totalPayment = payment;
@@ -155,7 +155,7 @@ public class Student {
 
     /**
      * setter for total payment
-     * @param payment
+     * @param payment given payment
      */
     public void setTotalPayment(double payment) {
         totalPayment += payment;
@@ -164,7 +164,7 @@ public class Student {
 
     /**
      * setter for tuition due
-     * @param tuition
+     * @param tuition givent tuition
      */
     public void setTuitionDue(double tuition){
         this.tuitionDue = tuition;
@@ -180,7 +180,7 @@ public class Student {
 
     /**
      * setter for date
-     * @param date
+     * @param date given date
      */
     public void setDate(Date date) {
         this.date = date;
@@ -196,7 +196,7 @@ public class Student {
 
     /**
      * check student type
-     * @param credit
+     * @param credit given credit
      * @return 1 if over 16, 0 if over 12, -1 if under 12
      */
     public int studentType(int credit){
@@ -207,7 +207,7 @@ public class Student {
 
     /**
      * setter for aid
-     * @param aid
+     * @param aid given aid
      */
     public void setAid(double aid) {
         financialAid = aid;
