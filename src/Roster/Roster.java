@@ -49,4 +49,16 @@ public class Roster {
             System.out.println("* end of roster **");
         }
     }
+    
+    public void print() {
+        if (size == 0) {
+            System.out.println("Student roseter is empty!");
+        } else {
+            System.out.println("* list of students in the roster **");
+            for (int i = 0; i < size; i++) {
+                System.out.println(roster[i].toString());
+            }
+            System.out.println("* end of roster **");
+        }
+    }
 }
