@@ -75,6 +75,28 @@ public class Roster {
             System.out.println("* end of roster **");
         }
     }
+    
+    public boolean calculate() {
+        if (size == 0) {
+            return false;
+        } else {
+            for (int i = 0; i < size; i++) {
+                roster[i].tuitionDue();
+            }
+            return true;
+        }
+    }
+    
+    public boolean setStatus(Student student) {
+        int index = find(student);
+        if(index == -1 || (roster[index] instanceof International)){
+            return false;
+        }
+        International temp = (International)roster[index];
+        temp.setStatus();
+        roster[index] = temp;
+        return true;
+    }
 
     private void orderNames(){
         for(int i = 0; i < size; i++){

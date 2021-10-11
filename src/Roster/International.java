@@ -2,6 +2,7 @@ package Roster;
 
 public class International extends NonResident {
     private boolean abroad;
+    private static final int ADDITIONAL_FEE = 2650;
 
     public International(Profile profile, int credit, boolean abroad) {
         super(profile, credit);
@@ -10,27 +11,18 @@ public class International extends NonResident {
 
     @Override
     public void tuitionDue() {
-        double tuition = 0;
-        switch(super.studentType(super.getCredits())){
-            case 0:
-                tuition = getTuitionFee();
-                break;
-            case 1:
-                tuition = getTuitionFee() + ((super.getCredits() - getMaxCredits()) * getFeePerCredit());
-                break;
-        }
-        if(!abroad) tuition += getFullTimeFee();
+        super.tuitionDue();
+        double tuition = super.getTuitionDue() + ADDITIONAL_FEE;
+        if(abroad) tuition = tuition - getTuitionFee();
         setTuitionDue(tuition);
     }
-
-
 
     @Override
     public String toString(){
         String separator = ":";
         String result = super.toString() + separator + "international";
         if(abroad) {
-            return result + separator + "study aborad";
+            return result + separator + "study abroad";
         }
         return result;
     }

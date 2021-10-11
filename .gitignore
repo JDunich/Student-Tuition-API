@@ -11,3 +11,4 @@
 *.class
 /bin/
 .DS_Store
+/bin1/

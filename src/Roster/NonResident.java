@@ -1,7 +1,9 @@
 package Roster;
 
 public class NonResident extends Student {
-
+    private static final int FULL_TIME_TUITION = 29737;
+    private static final int FEE_PER_CREDIT = 966;
+    
     public NonResident(Profile profile, int credit) {
         super(profile, credit);
     }
@@ -11,16 +13,16 @@ public class NonResident extends Student {
         double tuition = 0;
         switch(studentType(getCredits())){
             case 0:
-                tuition = getFullTimeFee() + getTuitionFee();
+                tuition = getFullTimeFee() + FULL_TIME_TUITION;
                 break;
             case 1:
-                tuition = getFullTimeFee() + getTuitionFee() + ((super.getCredits() - getMaxCredits()) * getFeePerCredit());
+                tuition = getFullTimeFee() + FULL_TIME_TUITION + ((super.getCredits() - getMaxCredits()) * FEE_PER_CREDIT);
                 break;
             case -1:
-                tuition = getPartTimeFee() + (super.getCredits() * getFeePerCredit());
+                tuition = getPartTimeFee() + (super.getCredits() * FEE_PER_CREDIT);
                 break;
         }
-        setTuitionDue(tuition);
+        setTuitionDue(tuition - getTotalPayment());
     }
 
 
@@ -29,4 +31,8 @@ public class NonResident extends Student {
         String result = super.toString();
         return result + "non-resident";
     }
+    
+    public int getTuitionFee(){
+        return FULL_TIME_TUITION;
+}
 }
