@@ -225,8 +225,10 @@ public class Roster {
      */
     private Student[] orderPayment(){
         Student[] arr = new Student[size];
+        Student[] newRoster = new Student[size];
         int count = 0;
         int k = 0;
+        int l = 0;
         while(k != size){
             if(roster[k].getTotalPayment() != 0){
                 arr[count] = roster[k];
@@ -234,6 +236,8 @@ public class Roster {
                 k++;
                 continue;
             }
+            newRoster[l] = roster[k];
+            l++;
             k++;
         }
 
@@ -248,7 +252,12 @@ public class Roster {
             arr[j + 1] = key;
         }
         Student[] temp = new Student[count];
-        for(int i = 0; i < count; i++) temp[i] = arr[i];
+        for(int i = 0; i < count; i++){
+            temp[i] = arr[i];
+            newRoster[l+i] = arr[i];
+        }
+        roster = newRoster;
         return temp;
+
     }
 }
