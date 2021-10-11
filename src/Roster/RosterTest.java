@@ -1,50 +1,50 @@
 package Roster;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.Assert.*;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.Test;
 
-class RosterTest {
+public class RosterTest {
 
     Roster arr = new Roster();
 
     @Test
-    void addStudent() {
+    public void addStudent() {
         Profile info = new Profile("John", Major.CS);
         Student student = new Student(info, 10);
         assertEquals(true, arr.add(student));
     }
 
     @Test
-    void addResident() {
+    public void addResident() {
         Profile info = new Profile("John", Major.CS);
         Resident student = new Resident(info, 10);
         assertEquals(true, arr.add(student));
     }
 
     @Test
-    void addNonResident() {
+    public void addNonResident() {
         Profile info = new Profile("John", Major.CS);
         NonResident student = new NonResident(info, 10);
         assertEquals(true, arr.add(student));
     }
 
     @Test
-    void addTriState() {
+    public void addTriState() {
         Profile info = new Profile("John", Major.CS);
         TriState student = new TriState(info, 10, "NY");
         assertEquals(true, arr.add(student));
     }
 
     @Test
-    void addInternational() {
+    public void addInternational() {
         Profile info = new Profile("John", Major.CS);
         International student = new International(info, 10, false);
         assertEquals(true, arr.add(student));
     }
 
     @Test
-    void addSame() {
+    public void addSame() {
         Profile info = new Profile("John", Major.CS);
         Student student1 = new Student(info, 10);
         Student student2 = new Student(info, 10);
@@ -53,7 +53,7 @@ class RosterTest {
     }
 
     @Test
-    void addFive() {
+    public void addFive() {
         Profile info1 = new Profile("John1", Major.CS);
         Profile info2 = new Profile("John2", Major.CS);
         Profile info3 = new Profile("John3", Major.CS);
@@ -72,7 +72,7 @@ class RosterTest {
     }
 
     @Test
-    void removeStudent() {
+    public void removeStudent() {
         Profile info = new Profile("John", Major.CS);
         Student student = new Student(info, 10);
         arr.add(student);
@@ -80,7 +80,7 @@ class RosterTest {
     }
 
     @Test
-    void removeResident() {
+    public void removeResident() {
         Profile info = new Profile("John", Major.CS);
         Resident student = new Resident(info, 10);
         arr.add(student);
@@ -88,7 +88,7 @@ class RosterTest {
     }
 
     @Test
-    void removeNonResident() {
+    public void removeNonResident() {
         Profile info = new Profile("John", Major.CS);
         NonResident student = new NonResident(info, 10);
         arr.add(student);
@@ -96,7 +96,7 @@ class RosterTest {
     }
 
     @Test
-    void removeStudentNotIn() {
+    public void removeStudentNotIn() {
         Profile info = new Profile("John", Major.CS);
         Student student = new Student(info, 10);
         assertEquals(false, arr.remove(student));

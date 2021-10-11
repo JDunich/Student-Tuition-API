@@ -10,11 +10,11 @@ import java.util.StringTokenizer;
  */
 public class TuitionManager {
     /**
-     * new roster
+     * initializes a new roster
      */
     Roster arr = new Roster();
     /**
-     * running boolean
+     * initializes a boolean to track if the program should continue running
      */
     private boolean running = true;
 
@@ -42,7 +42,7 @@ public class TuitionManager {
     }
 
     /**
-     * preforms task based on the command given
+     * performs task based on the command given
      * @param command given command
      * @param input given data
      */
@@ -229,7 +229,7 @@ public class TuitionManager {
     /**
      * if credit is valid
      * @param credit given credit
-     * @return boolean based on credit given
+     * @return true if credits are valid, false if not
      */
     private boolean validCredit(int credit){
         int max_credits = 24;
@@ -253,7 +253,7 @@ public class TuitionManager {
     /**
      * is valid credit for international student
      * @param credit given credit
-     * @return boolean based on if valid
+     * @return true if credits are valid, false if not
      */
     private boolean validInternationalCredit(int credit){
         int min_credits = 12;

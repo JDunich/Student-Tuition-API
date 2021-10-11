@@ -43,7 +43,7 @@ public class Roster {
     /**
      * add student to the array
      * @param student to add
-     * @return if student was added boolean
+     * @return true if student was added boolean, false if not
      */
     public boolean add(Student student) {
         if(find(student) == NOT_FOUND){
@@ -58,7 +58,7 @@ public class Roster {
     /**
      * remove student from the array
      * @param student to remove
-     * @return if student was removed boolean
+     * @return true if student was removed boolean, false if not
      */
     public boolean remove(Student student) {
         int i = find(student);
@@ -120,7 +120,7 @@ public class Roster {
 
     /**
      * calculate tuition due for all students
-     * @return boolean if there are students to calculate
+     * @return true if there are students to calculate, false if not
      */
     public boolean calculate() {
         if (size == 0) {
@@ -136,7 +136,7 @@ public class Roster {
     /**
      * set internation abroad status to true
      * @param student to change status
-     * @return boolean if international student found
+     * @return true if international student found, false if not
      */
     public boolean setStatus(Student student) {
         int index = find(student);
@@ -152,7 +152,7 @@ public class Roster {
     /**
      * calculate financial aid for student
      * @param student to calculate financial aid
-     * @return boolean if student is eligible
+     * @return true if student is eligible, false if not
      */
     public boolean financialAid(Student student) {
         int index = find(student);
@@ -183,7 +183,7 @@ public class Roster {
     /**
      * student to pay
      * @param student who is paying
-     * @return boolean if student pays valid about and exists in roster
+     * @return true if student pays valid about and exists in roster, false if not
      */
     public boolean pay(Student student) {
         int index = find(student);
