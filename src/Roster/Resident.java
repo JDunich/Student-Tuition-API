@@ -1,4 +1,6 @@
-package Roster;
+package com.example.demo;
+
+import java.text.DecimalFormat;
 
 /**
  * Resident calculations for Students
@@ -41,7 +43,7 @@ public class Resident extends Student {
                 tuition = PART_TIME_FEE + (super.getCredits() * FEE_PER_CREDIT);
                 break;
         }
-        setTuitionDue(tuition - getTotalPayment());
+        setTuitionDue(tuition - getTotalPayment() - getAid());
     }
 
     /**
@@ -51,6 +53,10 @@ public class Resident extends Student {
     @Override
     public String toString(){
         String result = super.toString();
+        DecimalFormat decimalFormat = new DecimalFormat("#0.00");
+        decimalFormat.setGroupingUsed(true);
+        decimalFormat.setGroupingSize(3);
+        if(getAid() != 0) return result + "resident:financial aid $" + decimalFormat.format(getAid());
         return result + "resident";
     }
 }
