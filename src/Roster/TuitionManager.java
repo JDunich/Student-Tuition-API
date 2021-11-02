@@ -134,7 +134,7 @@ public class TuitionManager {
                     return;
                 }
                 Date date = new Date(input.nextToken());
-                if(!date.isValid()){
+                if(date.isValid()){
                     System.out.println("Payment date invalid.");
                     return;
                 }
